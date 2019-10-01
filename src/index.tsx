@@ -2,11 +2,29 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { createStore } from 'redux';
+import { reduce } from './redux';
+import { Provider } from "react-redux";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+const resources = {
+    en: {
+      translation: {
+        "thing": "TRANSLATED"
+      }
+    }
+  };
+i18n.use(initReactI18next).init({
+    resources,
+    lng: "en",
+    debug: true
+})
+
+const store = createStore(reduce);
+
+ReactDOM.render(
+    <Provider store={store}><App/></Provider>, 
+    document.getElementById('root')
+);
