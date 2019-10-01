@@ -23,9 +23,9 @@ const TranslateReduxCounter = withTranslation()(connect(
   ({ count }: RootState) => ({ count, label: "withTranslation->redux counter" })
 )(CounterThing))
 
-const ReduxHook = withTranslation()(connect(
+const ReduxHook = connect(
   ({ count }: RootState) => ({ count, label: "redux->useTranslation counter" })
-)(HookCounter))
+)(HookCounter)
 
 interface AppProps {
   increment(): void;
